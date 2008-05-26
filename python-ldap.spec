@@ -6,7 +6,7 @@
 
 Name: python-ldap
 Version: 2.3.1
-Release: 3%{?dist}
+Release: 3%{?dist}.1
 Epoch: 0
 License: PSF - see LICENCE
 Group: System Environment/Libraries
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENCE CHANGES README TODO Demo
 
 %changelog
+* Mon May 26 2008 Dennis Gilmore <dennis@ausil.us> - 0:2.3.1-3.1
+- minor rebuild on sparc
+
 * Sun Feb 17 2008 Matthew Barnes <mbarnes@redhat.com> - 0:2.3.1-3.fc9
 - Rebuild with GCC 4.3
 
