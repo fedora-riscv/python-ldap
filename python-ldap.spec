@@ -2,7 +2,7 @@
 
 Name: python-ldap
 Version: 2.3.12
-Release: 2%{?dist}
+Release: 3%{?dist}
 Epoch: 0
 License: Python
 Group: System Environment/Libraries
@@ -63,9 +63,12 @@ sed -i 's|#! python|#!/usr/bin/python|g' Demo/simplebrowse.py
 %{python_sitearch}/ldapurl.py*
 %{python_sitearch}/ldif.py*
 %{python_sitearch}/ldap/
-%{python_sitearch}/python_ldap-%{version}-*.egg-info/
+%{python_sitearch}/python_ldap-%{version}-*.egg-info
 
 %changelog
+* Sat Jan 28 2012 Dennis Gilmore <dennis@ausil.us> - 0:2.3.12-3
+- remove / from end of egg-info since its just a file and not a dir
+
 * Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:2.3.12-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
