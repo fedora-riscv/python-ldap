@@ -12,7 +12,7 @@
 
 Name: python-ldap
 Version: 3.1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: Python
 Group: System Environment/Libraries
 Summary: An object-oriented API to access LDAP directory servers
@@ -150,6 +150,9 @@ popd
 %{python3_sitearch}/python_ldap-%{version}%{?prerelease}-py%{python3_version}.egg-info
 
 %changelog
+* Mon Jun 18 2018 Miro Hrončok <mhroncok@redhat.com> - 3.1.0-2
+- Rebuilt for Python 3.7
+
 * Fri May 25 2018 Christian Heimes <cheimes@redhat.com> - 3.1.0-1
 - New upstream release 3.1.0
 
