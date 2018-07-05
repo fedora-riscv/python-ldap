@@ -127,7 +127,6 @@ popd
 
 
 %files -n python2-ldap
-%defattr(-,root,root,-)
 %license python2/LICENCE
 %doc python2/CHANGES python2/README python2/TODO python2/Demo
 %{python_sitearch}/_ldap.so
@@ -138,7 +137,6 @@ popd
 %{python_sitearch}/python_ldap-%{version}%{?prerelease}-py2.7.egg-info
 
 %files -n python3-ldap
-%defattr(-,root,root,-)
 %license python3/LICENCE
 %doc python3/CHANGES python3/README python3/TODO python3/Demo
 %{python3_sitearch}/_ldap.cpython-*.so
