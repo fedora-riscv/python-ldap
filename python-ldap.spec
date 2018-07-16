@@ -130,12 +130,12 @@ popd
 %files -n python2-ldap
 %license python2/LICENCE
 %doc python2/CHANGES python2/README python2/TODO python2/Demo
-%{python_sitearch}/_ldap.so
-%{python_sitearch}/ldapurl.py*
-%{python_sitearch}/ldif.py*
-%{python_sitearch}/slapdtest/
-%{python_sitearch}/ldap/
-%{python_sitearch}/python_ldap-%{version}%{?prerelease}-py2.7.egg-info
+%{python2_sitearch}/_ldap.so
+%{python2_sitearch}/ldapurl.py*
+%{python2_sitearch}/ldif.py*
+%{python2_sitearch}/slapdtest/
+%{python2_sitearch}/ldap/
+%{python2_sitearch}/python_ldap-%{version}%{?prerelease}-py2.7.egg-info
 
 %files -n python3-ldap
 %license python3/LICENCE
