@@ -20,6 +20,7 @@ URL: http://python-ldap.org/
 Source0: https://files.pythonhosted.org/packages/source/p/%{name}/%{name}-%{version}%{?prerelease}.tar.gz
 
 ### Build Dependencies ###
+BuildRequires: gcc
 BuildRequires: openldap-devel >= %{openldap_version}
 BuildRequires: openssl-devel
 BuildRequires: cyrus-sasl-devel
