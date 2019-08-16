@@ -12,7 +12,7 @@
 
 Name: python-ldap
 Version: 3.1.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: Python
 Summary: An object-oriented API to access LDAP directory servers
 URL: http://python-ldap.org/
@@ -148,6 +148,9 @@ popd
 %{python3_sitearch}/python_ldap-%{version}%{?prerelease}-py%{python3_version}.egg-info
 
 %changelog
+* Fri Aug 16 2019 Miro Hrončok <mhroncok@redhat.com> - 3.1.0-6
+- Rebuilt for Python 3.8
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.0-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
