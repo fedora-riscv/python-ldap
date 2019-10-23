@@ -12,7 +12,7 @@
 
 Name: python-ldap
 Version: 3.1.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: Python
 Summary: An object-oriented API to access LDAP directory servers
 URL: http://python-ldap.org/
@@ -23,17 +23,12 @@ BuildRequires: gcc
 BuildRequires: openldap-devel >= %{openldap_version}
 BuildRequires: openssl-devel
 BuildRequires: cyrus-sasl-devel
-BuildRequires: python2-devel
-BuildRequires: python2-setuptools
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
 # Test dependencies
 BuildRequires: /usr/bin/tox
 BuildRequires: openldap-servers >= %{openldap_version}
 BuildRequires: openldap-clients >= %{openldap_version}
-BuildRequires: python2-coverage
-BuildRequires: python2-pyasn1 >= 0.3.7
-BuildRequires: python2-pyasn1-modules >= 0.1.5
 BuildRequires: python3-coverage
 BuildRequires: python3-pyasn1 >= 0.3.7
 BuildRequires: python3-pyasn1-modules >= 0.1.5
@@ -45,20 +40,6 @@ OpenLDAP 2.x libraries, and contains modules for other LDAP-related tasks\
 (including processing LDIF, LDAPURLs, LDAPv3 schema, etc.).
 
 %description %_description
-
-
-%package -n python2-ldap
-Summary: %summary
-
-Requires: openldap >= %{openldap_version}
-Requires: python2-pyasn1 >= 0.3.7
-Requires: python2-pyasn1-modules >= 0.1.5
-Requires: python2-setuptools
-
-Provides: python2-ldap%{?_isa} = %{version}-%{release}
-%{?python_provide:%python_provide python2-ldap}
-
-%description -n python2-ldap %_description
 
 
 %package -n     python3-ldap
@@ -77,77 +58,45 @@ Provides:  python3-pyldap%{?_isa} = %{version}-%{release}
 
 
 %prep
-%setup -qc
-pushd %{name}-%{version}%{?prerelease}
-popd
-
-mv %{name}-%{version}%{?prerelease} python3
-cp -a python{3,2}
-
+%setup -q -n %{name}-%{version}%{?prerelease}
 # Fix interpreter
-find python2 -name '*.py' | xargs sed -i '1s|^#!/usr/bin/env python|#!%{__python2}|'
-find python3 -name '*.py' | xargs sed -i '1s|^#!/usr/bin/env python|#!%{__python3}|'
+find . -name '*.py' | xargs sed -i '1s|^#!/usr/bin/env python|#!%{__python3}|'
 
 # Disable warnings in test to work around "'U' mode is deprecated"
 # https://github.com/python-ldap/python-ldap/issues/96
-sed -i 's,-Werror,-Wignore,g' python3/tox.ini
+sed -i 's,-Werror,-Wignore,g' tox.ini
 
 
 %build
-pushd python2
-%py2_build
-popd
-pushd python3
 %py3_build
-popd
 
 
 %check
 # don't download packages
 export PIP_INDEX_URL=http://host.invalid./
 export PIP_NO_DEPS=yes
-
-pushd python2
-LANG=C.UTF-8 TOXENV=py27 LOGLEVEL=10 tox --sitepackages
-popd
-
-pushd python3
-LANG=C.UTF-8 TOXENV=py%{python3_version_nodots} LOGLEVEL=10 tox --sitepackages
-popd
+TOXENV=py%{python3_version_nodots} LOGLEVEL=10 tox --sitepackages
 
 
 %install
-pushd python2
-%py2_install
-popd
-
-pushd python3
 %py3_install
-popd
-
-
-%files -n python2-ldap
-%license python2/LICENCE
-%doc python2/CHANGES python2/README python2/TODO python2/Demo
-%{python2_sitearch}/_ldap.so
-%{python2_sitearch}/ldapurl.py*
-%{python2_sitearch}/ldif.py*
-%{python2_sitearch}/slapdtest/
-%{python2_sitearch}/ldap/
-%{python2_sitearch}/python_ldap-%{version}%{?prerelease}-py2.7.egg-info
 
 %files -n python3-ldap
-%license python3/LICENCE
-%doc python3/CHANGES python3/README python3/TODO python3/Demo
+%license LICENCE
+%doc CHANGES README TODO Demo
 %{python3_sitearch}/_ldap.cpython-*.so
 %{python3_sitearch}/ldapurl.py*
 %{python3_sitearch}/ldif.py*
 %{python3_sitearch}/__pycache__/*
 %{python3_sitearch}/slapdtest/
 %{python3_sitearch}/ldap/
-%{python3_sitearch}/python_ldap-%{version}%{?prerelease}-py%{python3_version}.egg-info
+%{python3_sitearch}/python_ldap-%{version}%{?prerelease}-py%{python3_version}.egg-info/
 
 %changelog
+* Wed Oct 23 2019 Miro Hrončok <mhroncok@redhat.com> - 3.1.0-8
+- Subpackage python2-ldap has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 3.1.0-7
 - Rebuilt for Python 3.8.0rc1 (#1748018)
 
