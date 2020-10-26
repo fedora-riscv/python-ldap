@@ -10,7 +10,6 @@ License: Python
 Summary: An object-oriented API to access LDAP directory servers
 URL: http://python-ldap.org/
 Source0: https://files.pythonhosted.org/packages/source/p/%{name}/%{name}-%{version}%{?prerelease}.tar.gz
-Patch1: pyasn1-fixes.patch
 
 ### Build Dependencies ###
 BuildRequires: gcc
@@ -53,7 +52,6 @@ Provides:  python3-pyldap%{?_isa} = %{version}-%{release}
 
 %prep
 %setup -q -n %{name}-%{version}%{?prerelease}
-%patch1 -p1
 
 # Fix interpreter
 find . -name '*.py' | xargs sed -i '1s|^#!/usr/bin/env python|#!%{__python3}|'
