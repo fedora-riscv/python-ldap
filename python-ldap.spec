@@ -22,7 +22,6 @@ BuildRequires: python3-setuptools
 BuildRequires: /usr/bin/tox
 BuildRequires: openldap-servers >= %{openldap_version}
 BuildRequires: openldap-clients >= %{openldap_version}
-BuildRequires: python3-coverage
 BuildRequires: python3-pyasn1 >= 0.3.7
 BuildRequires: python3-pyasn1-modules >= 0.1.5
 
@@ -88,6 +87,7 @@ TOXENV=py%{python3_version_nodots} LOGLEVEL=10 tox --sitepackages
 %changelog
 * Fri Nov 13 2020 Miro Hrončok <mhroncok@redhat.com> - 3.3.1-2
 - Use https in URL
+- Drop build dependency on python3-coverage
 
 * Thu Oct 22 2020 Christian Heimes <cheimes@redhat.com> - 3.3.1-1
 - New upstream release 3.3.1
