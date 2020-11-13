@@ -5,10 +5,10 @@
 
 Name: python-ldap
 Version: 3.3.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: Python
 Summary: An object-oriented API to access LDAP directory servers
-URL: http://python-ldap.org/
+URL: https://python-ldap.org/
 Source0: https://files.pythonhosted.org/packages/source/p/%{name}/%{name}-%{version}%{?prerelease}.tar.gz
 
 ### Build Dependencies ###
@@ -86,6 +86,9 @@ TOXENV=py%{python3_version_nodots} LOGLEVEL=10 tox --sitepackages
 %{python3_sitearch}/python_ldap-%{version}%{?prerelease}-py%{python3_version}.egg-info/
 
 %changelog
+* Fri Nov 13 2020 Miro Hrončok <mhroncok@redhat.com> - 3.3.1-2
+- Use https in URL
+
 * Thu Oct 22 2020 Christian Heimes <cheimes@redhat.com> - 3.3.1-1
 - New upstream release 3.3.1
 
