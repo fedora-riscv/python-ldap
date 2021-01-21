@@ -59,7 +59,7 @@ find . -name '*.py' | xargs sed -i '1s|^#!/usr/bin/env python|#!%{__python3}|'
 
 
 %check
-%{__python3} -m unittest discover -v -s Tests -p 't_*'
+PYTHONPATH=%{buildroot}%{python3_sitearch} %{__python3} -m unittest discover -v -s Tests -p 't_*'
 
 
 %install
