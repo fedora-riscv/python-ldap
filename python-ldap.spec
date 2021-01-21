@@ -5,7 +5,7 @@
 
 Name: python-ldap
 Version: 3.3.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: Python
 Summary: An object-oriented API to access LDAP directory servers
 URL: https://python-ldap.org/
@@ -19,7 +19,6 @@ BuildRequires: cyrus-sasl-devel
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
 # Test dependencies
-BuildRequires: /usr/bin/tox
 BuildRequires: openldap-servers >= %{openldap_version}
 BuildRequires: openldap-clients >= %{openldap_version}
 BuildRequires: python3-pyasn1 >= 0.3.7
@@ -54,20 +53,13 @@ Provides:  python3-pyldap%{?_isa} = %{version}-%{release}
 # Fix interpreter
 find . -name '*.py' | xargs sed -i '1s|^#!/usr/bin/env python|#!%{__python3}|'
 
-# Disable warnings in test to work around "'U' mode is deprecated"
-# https://github.com/python-ldap/python-ldap/issues/96
-sed -i 's,-Werror,-Wignore,g' tox.ini
-
 
 %build
 %py3_build
 
 
 %check
-# don't download packages
-export PIP_INDEX_URL=http://host.invalid./
-export PIP_NO_DEPS=yes
-TOXENV=py%{python3_version_nodots} LOGLEVEL=10 tox --sitepackages
+%{__python3} -m unittest discover -v -s Tests -p 't_*'
 
 
 %install
@@ -85,6 +77,9 @@ TOXENV=py%{python3_version_nodots} LOGLEVEL=10 tox --sitepackages
 %{python3_sitearch}/python_ldap-%{version}%{?prerelease}-py%{python3_version}.egg-info/
 
 %changelog
+* Thu Jan 21 17:53:26 CET 2021 Christian Heimes <cheimes@redhat.com> - 3.3.1-3
+- Run test suite without tox (#1918913)
+
 * Fri Nov 13 2020 Miro Hrončok <mhroncok@redhat.com> - 3.3.1-2
 - Use https in URL
 - Drop build dependency on python3-coverage
