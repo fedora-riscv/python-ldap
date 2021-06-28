@@ -5,11 +5,13 @@
 
 Name: python-ldap
 Version: 3.3.1
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: Python
 Summary: An object-oriented API to access LDAP directory servers
 URL: https://python-ldap.org/
 Source0: https://files.pythonhosted.org/packages/source/p/%{name}/%{name}-%{version}%{?prerelease}.tar.gz
+
+Patch0001: 0001-Fix-SASL-get-set-options-on-big-endian-platforms.patch
 
 ### Build Dependencies ###
 BuildRequires: gcc
@@ -49,7 +51,7 @@ Provides:  python3-pyldap%{?_isa} = %{version}-%{release}
 
 
 %prep
-%setup -q -n %{name}-%{version}%{?prerelease}
+%autosetup -p1 -n %{name}-%{version}%{?prerelease}
 # Fix interpreter
 find . -name '*.py' | xargs sed -i '1s|^#!/usr/bin/env python|#!%{__python3}|'
 
@@ -77,6 +79,10 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} %{__python3} -m unittest discover -v 
 %{python3_sitearch}/python_ldap-%{version}%{?prerelease}-py%{python3_version}.egg-info/
 
 %changelog
+* Mon Jun 28 2021 Christian Heimes <cheimes@redhat.com> - 3.3.1-6
+- Fix SASL get/set options on big endian platforms
+- Resolves: rhbz#1976824
+
 * Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 3.3.1-5
 - Rebuilt for Python 3.10
 
