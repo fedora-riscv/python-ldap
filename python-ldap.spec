@@ -5,7 +5,7 @@
 
 Name: python-ldap
 Version: 3.3.1
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: Python
 Summary: An object-oriented API to access LDAP directory servers
 URL: https://python-ldap.org/
@@ -79,6 +79,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} %{__python3} -m unittest discover -v 
 %{python3_sitearch}/python_ldap-%{version}%{?prerelease}-py%{python3_version}.egg-info/
 
 %changelog
+* Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 3.3.1-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Mon Jun 28 2021 Christian Heimes <cheimes@redhat.com> - 3.3.1-6
 - Fix SASL get/set options on big endian platforms
 - Resolves: rhbz#1976824
