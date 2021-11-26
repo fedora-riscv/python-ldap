@@ -2,16 +2,16 @@
 # global prerelease b4
 
 %global openldap_version 2.4.45-4
+%global pypi_name python-ldap
 
 Name: python-ldap
-Version: 3.3.1
+Version: 3.4.0
 Release: %autorelease
 License: Python
 Summary: An object-oriented API to access LDAP directory servers
 URL: https://python-ldap.org/
-Source0: https://files.pythonhosted.org/packages/source/p/%{name}/%{name}-%{version}%{?prerelease}.tar.gz
+Source0: %{pypi_source}
 
-Patch0001: 0001-Fix-SASL-get-set-options-on-big-endian-platforms.patch
 
 ### Build Dependencies ###
 BuildRequires: gcc
