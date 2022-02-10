@@ -11,6 +11,7 @@ License: Python
 Summary: An object-oriented API to access LDAP directory servers
 URL: https://python-ldap.org/
 Source0: %{pypi_source}
+Patch0: python-ldap-always-use-ldap-library.patch
 
 
 ### Build Dependencies ###
